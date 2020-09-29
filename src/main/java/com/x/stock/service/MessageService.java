@@ -68,6 +68,7 @@ public class MessageService implements InitializingBean {
     }
 
     public List<Map<String,Object>> getMaNum() {
+        logger.info("get ma num");
         return dao.getMaNum();
     }
 }
