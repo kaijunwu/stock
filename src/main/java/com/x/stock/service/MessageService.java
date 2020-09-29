@@ -3,6 +3,8 @@ package com.x.stock.service;
 import com.x.stock.bean.StockInfo;
 import com.x.stock.crawler.StockCrawler;
 import com.x.stock.dao.MessageMapper;
+import com.x.stock.util.FileUtil;
+import com.x.stock.util.HtmlUtilBuild;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -67,8 +69,12 @@ public class MessageService implements InitializingBean {
         thread.start();
     }
 
-    public List<Map<String,Object>> getMaNum() {
+    public String getMaNum() {
         logger.info("get ma num");
-        return dao.getMaNum();
+        List<Map<String,Object>> list = dao.getMaNum();
+        String htmlStr = HtmlUtilBuild.buildHtml(list);
+        String path = "C:\\Users\\wukaijun\\Desktop\\00\\tmp1\\111.html";
+        FileUtil.save2File(path,htmlStr);
+        return path;
     }
 }

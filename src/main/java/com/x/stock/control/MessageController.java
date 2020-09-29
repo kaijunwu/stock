@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Title: MessageController
@@ -34,12 +33,7 @@ public class MessageController {
     }
 
     @RequestMapping(value = "getMaNum", method = RequestMethod.GET)
-    public String getMaNum(){
-        StringBuilder builder = new StringBuilder();
-        List<Map<String,Object>> list = service.getMaNum();
-        for(Map<String,Object> map:list){
-            builder.append(map);
-        }
-        return builder.toString();
+    public String getMaNum() {
+        return service.getMaNum();
     }
 }
