@@ -34,6 +34,9 @@ public class MessageController {
 
     @RequestMapping(value = "getMaNum", method = RequestMethod.GET)
     public String getMaNum() {
-        return service.getMaNum();
+
+        String fileName = service.getMaNum();
+        return "<html><a href=\"" + service.getMaNum() + "\">点击  </a>" + fileName + "</html>";
+
     }
 }
