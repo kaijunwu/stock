@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.stock.dao.MessageMapper">
+
+   <insert id="create" parameterType="com.x.stock.bean.StockInfo">
+    create
+	 table
+		stock (
+		code varchar(100) default null,
+		name varchar(100) default null,
+		id int(11) default null,
+		day varchar(100) default null,
+		open float default null,
+		high float default null,
+		low float default null,
+		close float default null,
+		volume bigint(20) default null,
+		ma_price5 float default null,
+		ma_volume5 bigint(20) default null ) ENGINE = InnoDB default CHARSET = utf8
+   </insert>
+
+   <insert id="saveStock" parameterType="com.x.stock.bean.StockInfo">
+    insert into
+		stock(
+		code,
+		name,
+		day,
+		open,
+		high,
+		low,
+		close,
+		volume,
+		ma_price5,
+		ma_volume5)
+	values (
+	    #{code},
+	    #{name},
+	    #{day},
+		${open},
+		${high},
+		${low},
+		${close},
+		${volume},
+		${maPrice5},
+		${maVolume5}
+		 )
+   </insert>
+
+	<select id="getMessage" resultType="com.x.stock.bean.StockInfo">
+		select
+		code as "code",
+		name as "name",
+		day as "day",
+		open as "open",
+		high as "high",
+		low as "low",
+		close as "close",
+		volume as "volume",
+		ma_price5 as "maPrice5",
+		ma_volume5 as "maVolume5" from stock
+	</select>
+
+	<select id="getMaNum" resultType="java.util.Map">
+    select
+	  day,
+	  count(1)
+   from
+	  stock a
+   where
+	 (substring(day, 12, 9) = '15:00:00'
+	 or substring(day, 12, 9) = '11:30:00')
+	 and ma_price5 >= close
+  group by
+	 day
+	</select>
+</mapper>
