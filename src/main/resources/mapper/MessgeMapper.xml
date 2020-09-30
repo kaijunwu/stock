@@ -69,8 +69,12 @@
    where
 	 (substring(day, 12, 9) = '15:00:00'
 	 or substring(day, 12, 9) = '11:30:00')
-	 and ma_price5 >= close
+	 <![CDATA[
+	 and  close >= ma_price5
+	 and  volume >= ma_volume5
+	  ]]>
   group by
 	 day
+	 order by day asc
 	</select>
 </mapper>
